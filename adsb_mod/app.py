@@ -40,7 +40,7 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
 <style>__STYLE__
 html,body{height:100%}
 .wrap{display:flex;height:100%}
-.side{width:360px;flex:0 0 360px;display:flex;flex-direction:column;min-height:0;border-right:1px solid #262626}
+.side{width:380px;flex:0 0 380px;display:flex;flex-direction:column;min-height:0;border-right:1px solid #262626}
 .state{padding:12px 14px 8px;opacity:.85}
 .state::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#777;margin-right:7px}
 .state.good::before{background:#3fb950}.state.bad{opacity:1}.state.bad::before{background:#e5534b}
@@ -51,8 +51,8 @@ html,body{height:100%}
 .tile .l{font-size:11.5px;opacity:.65}.tile .s{font-size:11px;opacity:.5;margin-top:1px}
 .list{flex:1;min-height:0;overflow:auto;padding:0 6px}
 table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
-th{position:sticky;top:0;background:#141414;text-align:left;font-weight:500;opacity:.7;padding:4px 6px}
-td{padding:4px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px}
+th{position:sticky;top:0;background:#141414;text-align:left;font-weight:500;opacity:.7;padding:4px 5px;white-space:nowrap}
+td{padding:4px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px}
 .n{text-align:right}tr.nopos td{opacity:.5}
 .empty{padding:14px 10px;opacity:.6}
 .links{padding:10px 14px 12px;border-top:1px solid #262626;display:flex;flex-direction:column;gap:4px;font-size:12.5px}
