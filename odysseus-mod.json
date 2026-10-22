@@ -1,0 +1,44 @@
+{
+  "manifest_version": 1,
+  "id": "adsb",
+  "name": "ADS-B Receiver",
+  "version": "1.0.0",
+  "description": "Your ADS-B feeder (adsb.im, tar1090/readsb): what it hears now, its live map, and links to the feeder, the aggregators and Flys Down.",
+  "author": "Jaron Wilson",
+  "license": "MIT",
+  "homepage": "https://github.com/Jaron-Wilson/odysseus-adsb",
+  "min_core": "0.1",
+  "tags": ["radio", "hardware", "monitoring"],
+  "runtime": {
+    "type": "process",
+    "command": ["python", "-m", "adsb_mod"],
+    "health": "/health",
+    "start": "lazy",
+    "idle_stop_minutes": 10
+  },
+  "permissions": ["network.lan"],
+  "ui": {
+    "tabs": [{ "id": "receiver", "title": "ADS-B receiver", "icon": "adsb", "path": "/",
+               "section": "system", "after": "devices", "replaces": "adsb" }],
+    "home_cards": [{ "id": "status", "title": "ADS-B receiver", "path": "/cards/status", "height": 110 }],
+    "settings_path": "/settings"
+  },
+  "tools": { "endpoint": "/mod/tools",
+             "keywords": ["ads-b", "adsb", "aircraft", "planes", "flights", "overhead", "tar1090", "readsb", "feeder"] },
+  "tutorial": {
+    "version": 1,
+    "steps": [
+      { "title": "What your receiver hears",
+        "body": "The **ADS-B receiver** tab shows what your feeder decodes right now: aircraft heard and how many have a position, messages per second, range over the last 15 minutes, signal and gain, and the list of aircraft. It refreshes every 5 seconds while the tab is open." },
+      { "title": "Set the receiver address",
+        "body": "Enter your receiver's tar1090 map address, like `http://adsb-feeder:8080/` for an adsb.im feeder. Coming from the old built-in page? Settings offers the address Odysseus had saved, or paste the old `adsb.json` and press **Import**.",
+        "action": { "label": "Open settings", "settings": true } },
+      { "title": "The live map",
+        "body": "The receiver's own tar1090 map sits beside the numbers. **Open the map in a new tab** gives you the full map with its own settings. An https Odysseus can only show an https receiver inside the tab." },
+      { "title": "Feeder and network links",
+        "body": "The links under the list open the feeder's adsb.im page (SDR, aggregators, MLAT, updates), the adsb.lol and adsb.fi maps it feeds, and Flys Down, the live map built on the same feed." },
+      { "title": "Ask the agent",
+        "body": "In a chat, ask *is my ADS-B receiver working?* or *what planes are overhead?* The agent answers from this mod. The Home page has a card with the aircraft count." }
+    ]
+  }
+}
