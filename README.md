@@ -101,6 +101,39 @@ only with your GitHub token), **Details**, **Review and install**. Or Settings >
 paste `git@github.com:Jaron-Wilson/odysseus-adsb.git`. Approve the permission, then open
 System > ADS-B receiver and set the address (or import it, above).
 
+## Run without Odysseus
+
+The receiver page also works on its own, on any machine that can reach the feeder. With no `ODYSSEUS_URL` in its environment the mod runs standalone: it asks for a password
+instead of trusting Odysseus's signed headers, keeps its settings and data in files under `MOD_DATA_DIR`,
+and writes notifications to its log.
+
+```bash
+git clone https://github.com/Jaron-Wilson/odysseus-adsb.git && cd odysseus-adsb
+# Python 3.10 or newer, standard library only: nothing to install
+MOD_PASSWORD=pick-one python3 -m adsb_mod      # then open http://127.0.0.1:8765/
+```
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `MOD_PASSWORD` | made up and printed at start | The sign-in password (one local user) |
+| `MOD_PORT` | `8765` | The port it listens on |
+| `MOD_HOST` | `127.0.0.1` | The address it listens on. It speaks plain HTTP: to reach it from another machine, put HTTPS in front (for example `tailscale serve`) rather than listening on `0.0.0.0` |
+| `MOD_DATA_DIR` | `./data` | Where its settings and data are kept |
+
+What works standalone:
+
+- The status page and the live map of your receiver, the links to the aggregators
+- Settings (the receiver address and the rest, see [Settings](#settings)), export and import
+
+What needs Odysseus:
+
+- The agent tools (`adsb_status` and the others) in Odysseus's chat, and its Home card
+- Notifications in Odysseus (standalone they are printed to the log)
+- Several users with Odysseus's own sign-in; standalone there is one password
+
+`tests/test_standalone.py` starts it this way, as its own process, and checks the sign-in, that
+forged Odysseus headers are ignored, and the pages.
+
 ## Develop
 
 Python 3.10 or newer, standard library only.
